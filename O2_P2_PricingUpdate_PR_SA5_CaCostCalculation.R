@@ -22,13 +22,13 @@ for(i in 1:nrow(MergedPricingData)){
 	USA_IF_Present = is.na(as.character(MergedPricingData$USA_price[i]))
 
 	#Calculate the current Exchange Rate
-	if(CND_IF_Present == FALSE | USA_IF_Present == FALSE ){
+	if(CND_IF_Present == FALSE & USA_IF_Present == FALSE ){ #Changed this condition from OR to AND
 		MergedPricingData$Current_Exchange_Rate[i] <- as.numeric(as.character(MergedPricingData$CND_price[i]))/as.numeric(as.character(MergedPricingData$USA_price[i]))
 	} else { MergedPricingData$Current_Exchange_Rate[i] <- "Missing"}
 
 
 	#Calculate the current discont rate CANADA
-	if(CND_IF_Present == FALSE | USA_IF_Present == FALSE ){
+	if(CND_IF_Present == FALSE){ #Removed the OR condition that the USA_IF_Present is FALSE
 		CURR_Discount <- (1-(as.numeric(MergedPricingData$CND_cost[i])/as.numeric(as.character(MergedPricingData$CND_price[i]))))*100
 		MergedPricingData$CURR_Discount[i] <- CURR_Discount
 			
