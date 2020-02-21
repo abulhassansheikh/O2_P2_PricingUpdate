@@ -36,6 +36,7 @@ for (i in 1:nrow(Selected_Brands)){
 	#Identify the Main--sheet and pull it
 	x <- Sys.glob("main--*.csv")
 	PulledMain=read.csv(x , header = TRUE)
+	colnames(PulledMain)[1] <- gsub("ï..","",colnames(PulledMain)[1])
 
 	MainSubset <- subset(PulledMain, delete=="N" & type=="simple", 
                            select=c(internal_sku, sku, attribute_set , usa_price, usa_retail_price, usa_cost, usa_jobber_price, 
